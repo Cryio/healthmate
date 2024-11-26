@@ -230,3 +230,37 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: 16px; /* Smaller subheading font size */
   }
 }
+
+/* Style for Google Sign-In button */
+#google-signin-button {
+  width: 100%; /* Same width as .sign-in */
+  background-color: #444444; /* Dark button color */
+  color: white; /* Text color for contrast */
+  border: none;
+  border-radius: 5px; /* Match the border radius */
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px; /* Match the padding */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 15px;
+}
+
+#google-signin-button:hover {
+  cursor: pointer;
+  background-color: #333333; /* Slightly darker on hover */
+}
+
+#google-signin-button:active {
+  transform: scale(0.97);
+  background-color: #333333;
+}
+
+#google-signin-button img {
+  height: 15px; /* Size for the Google icon */
+  margin-right: 10px; /* Spacing for the icon */
+}
