@@ -87,7 +87,6 @@ function signIn() {
 function handleCredentialResponse(response) {
   console.log("Encoded JWT ID token: " + response.credential);
 
-  // Send token to the server for validation
   fetch("/google-oauth-callback", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -99,14 +98,45 @@ function handleCredentialResponse(response) {
         alert(`Welcome, ${data.name}!`);
         window.location.href = "http://172.19.20.211:5000"; // Redirect after successful login
       } else {
-        alert("Google sign-in failed: " + data.error);
+        throw new Error(data.error || "Google sign-in failed");
       }
     })
     .catch((error) => {
       console.error("Error during Google sign-in:", error);
       alert("An unexpected error occurred. Please try again.");
     });
-}
+
+    try {
+      const token = response.credential;
+      console.log("JWT Token:", token);
+  
+      // Decode and verify token (optional)
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      console.log("Decoded JWT Token:", decodedToken);
+  
+      // Perform server validation or other logic
+      fetch("/google-oauth-callback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            alert(`Welcome, ${data.name}!`);
+            window.location.href = "http://172.19.20.211:5000"; // Ensure all tasks are completed before redirect
+          } else {
+            console.error("Server validation failed:", data.error);
+            alert("Google sign-in failed.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } catch (e) {
+      console.error("Error in Google Sign-In response:", e);
+    }
+  }  
 
 // Initialize Google OAuth
 window.onload = function () {
