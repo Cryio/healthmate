@@ -78,9 +78,12 @@ function signIn() {
   } else {
     // Proceed with sign-in logic if no errors
     console.log("Form is valid");
-    alert("Login successful!");
-    const namePart = mail.split("@")[0];
+
+    // Save the name to localStorage (extract from email)
+    const namePart = email.split("@")[0];
     localStorage.setItem("Name", namePart);
+
+    alert("Login successful!");
     window.location.href = "http://172.19.20.211:5000"; // Redirect to the dashboard
   }
 }
@@ -93,31 +96,36 @@ window.onload = function () {
       callback: handleCredentialResponse
     });
     google.accounts.id.renderButton(
-      document.getElementById("google-signin-button"), 
+      document.getElementById("google-signin-button"),
       { theme: "outline", size: "large" }  // Customize button size and style
     );
-  };
-  
+  }
+
   function handleCredentialResponse(response) {
     try {
       const token = response.credential; // Get the JWT token
       console.log("JWT Token:", token);
-  
-      // Parse the token (optional)
+
+      // Decode the token (optional)
       const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
       console.log("Decoded JWT Token:", decodedToken);
-      localStorage.setItem("Name", decodedToken.name); 
+
+      // Save the user's name to localStorage
+      localStorage.setItem("Name", decodedToken.name);
+      alert(`Welcome, ${decodedToken.name}!`);
+
+      // Redirect after successful login
       window.location.href = "http://172.19.20.211:5000";
-      // Continue with your sign-in logic here
     } catch (e) {
       console.error("Error during Google sign-in:", e);
     }
   }
+
   if (typeof google === "undefined") {
     console.error("Google API is not defined. Ensure the script is loaded.");
     alert("Google Sign-In is unavailable at the moment. Please try again later.");
   }
-  }
+};
 
 // Attach event listener to Sign-In button
 document.querySelector(".sign-in").addEventListener("click", signIn);
