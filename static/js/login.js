@@ -141,5 +141,31 @@ window.onload = function () {
   }
   }
 
+  function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+  
+    fetch("https://healthmate-ai-bot.netlify.app//google-oauth-callback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: response.credential }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          // Save user information to localStorage
+          localStorage.setItem("Name", data.name);
+  
+          alert(`Welcome, ${data.name}!`);
+          window.location.href = "http://172.19.20.211:5000";
+        } else {
+          alert("Google sign-in failed: " + data.error);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during Google sign-in:", error);
+        alert("An unexpected error occurred. Please try again.");
+      });
+  }
+  
 // Attach event listener to Sign-In button
 document.querySelector(".sign-in").addEventListener("click", signIn);
