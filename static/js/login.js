@@ -104,12 +104,10 @@ window.onload = function () {
       // Parse the token (optional)
       const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
       console.log("Decoded JWT Token:", decodedToken);
-      alert(`Welcome, ${data.name}!`);
       window.location.href = "http://172.19.20.211:5000";
       // Continue with your sign-in logic here
     } catch (e) {
       console.error("Error during Google sign-in:", e);
-      alert(`Welcome, ${data.name}!`);
       window.location.href = "http://172.19.20.211:5000";
     }
   }
