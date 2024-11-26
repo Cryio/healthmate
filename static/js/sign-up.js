@@ -62,7 +62,7 @@ function validation() {
     users.push({ email: mail, password: pass });
     localStorage.setItem("Users", JSON.stringify(users));
     alert("User signed up successfully!");
-    window.location.href="http://192.168.169.154:5000"
+    window.location.href="http://172.19.20.211:5000"
   }
 }
 
