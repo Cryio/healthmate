@@ -135,6 +135,7 @@ window.onload = function () {
       console.error("Error during Google sign-in:", e);
     }
   }
+}
 if (typeof google === "undefined") {
   console.error("Google API is not defined. Ensure the script is loaded.");
   alert("Google Sign-In is unavailable at the moment. Please try again later.");
