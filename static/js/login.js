@@ -1,4 +1,4 @@
-// Toggle Password Visibility
+// Password Visibility Toggle
 const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");
 
@@ -41,15 +41,10 @@ const clearError = (ele) => {
 };
 
 // Validation functions
-const mailFormat = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-};
+const mailFormat = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
 
-const passFormat = (password) => {
-  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@#$!%*?&]{8,96}$/;
-  return re.test(password);
-};
+const passFormat = (password) =>
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@#$!%*?&]{8,96}$/.test(password);
 
 // Sign-In Function with validation
 function signIn() {
@@ -114,15 +109,26 @@ function handleCredentialResponse(response) {
 }
 
 // Initialize Google OAuth
-google.accounts.id.renderButton(
-  document.getElementById("google-signin-button"), // Ensure this ID matches
-  {
-    theme: "outline",
-    size: "large",
-  }
-);
-console.log("Google sign-in button rendered");
+window.onload = function () {
+  if (typeof google !== "undefined") {
+    google.accounts.id.initialize({
+      client_id: "382357017579-sieojf15iists629u2r5o06d3h92j9ej.apps.googleusercontent.com", // Replace with your actual client ID
+      callback: handleCredentialResponse,
+    });
 
+    google.accounts.id.renderButton(
+      document.getElementById("google-signin-button"), // Ensure this matches your HTML
+      {
+        theme: "outline",
+        size: "large",
+      }
+    );
+    console.log("Google sign-in button rendered");
+  } else {
+    console.error("Google API script failed to load.");
+    alert("Google Sign-In is currently unavailable. Please try again later.");
+  }
+};
 
 // Attach event listener to Sign-In button
 document.querySelector(".sign-in").addEventListener("click", signIn);
