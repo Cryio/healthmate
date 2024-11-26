@@ -3,145 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat Interface</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-        }
-        .chat-box {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 15px;
-            height: 400px;
-            overflow-y: scroll;
-            background-color: #f9f9f9;
-            margin-bottom: 10px;
-        }
-        .chat {
-            margin: 5px 0;
-        }
-        .chat.user {
-            text-align: right;
-        }
-        .chat.model {
-            text-align: left;
-        }
-        .chat p {
-            display: inline-block;
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 70%;
-        }
-        .chat.user p {
-            background-color: #007BFF;
-            color: white;
-        }
-        .chat.model p {
-            background-color: #f1f1f1;
-            color: black;
-        }
-        form {
-            display: flex;
-            justify-content: space-between;
-        }
-        textarea {
-            width: 80%;
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>HealthMate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>AI Chat Interface</h1>
+        <header>
+            <h1 id="app-name">HealthMate</h1>
+            <div class="theme-toggle">
+                <span id="welcome-message"></span>
+                <span>Dark Mode</span>
+                <input type="checkbox" id="theme-toggle">
+                <label for="theme-toggle"></label>
+            </div>
+        </header>
         <div class="chat-box" id="chat-box">
             <!-- Chat messages will appear here -->
         </div>
+
+        <!-- Chat Input Section -->
         <form id="chat-form">
-            <textarea id="user-prompt" placeholder="Enter your message..." rows="2"></textarea>
+            <textarea id="user-prompt" placeholder="Type your message..." rows="1"></textarea>
             <button type="submit">Send</button>
         </form>
     </div>
 
-    <script>
-        const form = document.getElementById('chat-form');
-        const chatBox = document.getElementById('chat-box');
-        const promptInput = document.getElementById('user-prompt');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const userInput = promptInput.value.trim();
-            if (!userInput) return;
-
-            // Display the user's message
-            appendMessage('user', userInput);
-
-            // Clear the input field
-            promptInput.value = '';
-
-            try {
-                // Send the user input to the server for text generation
-                const response = await fetch('/generate-text', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ prompt: userInput })
-                });
-
-                const data = await response.json();
-                
-                if (data.generated_text) {
-                    // Display the model's generated response
-                    appendMessage('model', data.generated_text);
-                } else if (data.error) {
-                    // Handle error from the server
-                    appendMessage('model', `Error: ${data.error}`);
-                }
-
-            } catch (error) {
-                appendMessage('model', 'An error occurred while generating text.');
-            }
-        });
-
-        function appendMessage(sender, message) {
-            const chatMessage = document.createElement('div');
-            chatMessage.classList.add('chat', sender);
-
-            const messageContent = document.createElement('p');
-            messageContent.innerHTML = message;  // Use innerHTML to support formatted text
-            chatMessage.appendChild(messageContent);
-
-            chatBox.appendChild(chatMessage);
-            chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll to the bottom
-        }
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+

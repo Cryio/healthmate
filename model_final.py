@@ -9,7 +9,7 @@ if not logging.getLogger().hasHandlers():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Create cache directory if it doesn't exist
-cache_dir = "./model_cache"
+cache_dir = "./fine_tuned_model"
 os.makedirs(cache_dir, exist_ok=True)
 logging.info(f"Cache directory set to: {cache_dir}")
 
@@ -95,7 +95,7 @@ def generate_text():
     logging.info(f"Tokenized input ids: {inputs.input_ids}, prompt token length: {prompt_token_length}")
 
     # Set a dynamic limit for the maximum number of new tokens generated
-    max_new_tokens = max(50, int(prompt_token_length * 5))  # Generate 1.5x more tokens than the prompt length
+    max_new_tokens = max(50, int(prompt_token_length * 1.5))  # Generate 1.5x more tokens than the prompt length
     logging.info(f"Max new tokens for generation set to: {max_new_tokens}")
 
     # Retry logic in case non-medical content is generated

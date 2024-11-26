@@ -1,0 +1,284 @@
+/* General Reset and Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Light Mode Styles */
+  body.light {
+    background-color: #fce3ad; /* Background Color */
+    color: #333;
+  }
+  
+  body.light header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  body.light .chat-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+  }
+  
+  body.light .chat.user p {
+    background-color: #e5ab71; /* Button Color */
+    color: #ffffff;
+  }
+  
+  body.light .chat.model p {
+    background-color: #fdf0e0; /* Textbox Color */
+    color: #333;
+  }
+  
+  body.light form {
+    background-color: #fdf0e0; /* Lighter background for the form */
+    border-top: 1px solid #ddd;
+  }
+  
+  body.light form textarea {
+    background-color: #fff; /* Lighter color for textareas */
+    border: 1px solid #ddd;
+    color: #333;
+  }
+  
+  body.light form textarea::placeholder {
+    color: #aaa;
+  }
+  
+  body.light form button {
+    background-color: #e5ab71; /* Button color */
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  body.light form button:hover {
+    background-color: #d28a5d; /* Slightly darker on hover */
+  }
+  
+  /* Dark Mode Styles (for reference) */
+  body.dark {
+    background-color: #333333;
+    color: #fdf0e0;
+  }
+  
+  body.dark header {
+    background-color: #444444;
+    border-bottom: 1px solid #555555;
+  }
+  
+  body.dark .chat-box {
+    background-color: #444444;
+    border: 1px solid #555555;
+  }
+  
+  body.dark .chat.user p {
+    background-color: #e5ab71;
+    color: #ffffff;
+  }
+  
+  body.dark .chat.model p {
+    background-color: #555555;
+    color: #fdf0e0;
+  }
+  
+  body.dark form {
+    background-color: #444444;
+    border-top: 1px solid #555555;
+  }
+  
+  body.dark form textarea {
+    background-color: #555555;
+    border: 1px solid #666666;
+    color: #fdf0e0;
+  }
+  
+  body.dark form textarea::placeholder {
+    color: #aaa;
+  }
+  
+  body.dark form textarea:hover {
+    border-color: #888888;
+  }
+  
+  body.dark form textarea:focus {
+    border-color: #e5ab71;
+    box-shadow: 0 0 5px rgba(229, 171, 113, 0.4);
+  }
+  
+  body.dark form button {
+    background-color: #e5ab71;
+    color: white;
+  }
+  
+  body.dark form button:hover {
+    background-color: #d28a5d;
+  }
+  
+  /* Page Layout */
+  .container {
+    width: 90%;
+    max-width: 800px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distributes content equally */
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative; /* Required for absolute positioning of the title */
+  }
+  #welcome-message{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the title horizontally */
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .chat {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .chat.user p {
+    max-width: 70%;
+    background-color: #e5ab71;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 10px;
+  }
+  
+  .chat.model p {
+    max-width: 70%;
+    background-color: #fdf0e0;
+    color: black;
+    padding: 10px;
+    border-radius: 10px 10px 10px 0;
+  }
+  
+  /* Form and Input Styling */
+  form {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 0 0 10px 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  form textarea {
+    flex-grow: 1;
+    resize: none;
+    border: 1px solid;
+    outline: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+  }
+  
+  form textarea:hover {
+    border-color: #aaa;
+  }
+  
+  form textarea:focus {
+    border-color: #e5ab71;
+    box-shadow: 0 0 5px rgba(229, 171, 113, 0.4);
+  }
+  
+  form button {
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  form button:hover {
+    transform: scale(1.05);
+  }
+  
+  form button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Light/Dark Mode Slider */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .theme-toggle span {
+    font-size: 0.9rem;
+  }
+  
+  .theme-toggle input {
+    display: none;
+  }
+  
+  .theme-toggle label {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-toggle label::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  .theme-toggle input:checked + label {
+    background-color: #e5ab71;
+  }
+  
+  .theme-toggle input:checked + label::before {
+    transform: translateX(20px);
+  }
+  

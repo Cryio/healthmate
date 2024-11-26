@@ -1,0 +1,14 @@
+2024-10-22 01:34:55,490 - INFO - Starting fine-tuning process...
+2024-10-22 01:34:55,490 - INFO - Loading tokenizer: meta-llama/Llama-3.2-1B-Instruct
+2024-10-22 01:34:56,808 - INFO - Tokenizer loaded successfully.
+2024-10-22 01:34:56,808 - INFO - Loading model: meta-llama/Llama-3.2-1B-Instruct
+2024-10-22 01:34:57,711 - INFO - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2024-10-22 01:35:00,278 - WARNING - Some parameters are on the meta device because they were offloaded to the cpu.
+2024-10-22 01:35:00,279 - INFO - Model loaded successfully.
+2024-10-22 01:35:00,279 - INFO - Loading dataset from files: {'train': './medical_train_data.csv', 'validation': './medical_val_data.csv'}
+2024-10-22 01:35:01,646 - INFO - Dataset loaded successfully.
+2024-10-22 01:35:01,646 - INFO - Tokenizing dataset...
+2024-10-22 01:35:01,956 - INFO - Dataset tokenized successfully.
+2024-10-22 01:35:02,009 - INFO - Initializing Trainer...
+2024-10-22 01:35:02,036 - WARNING - You shouldn't move a model that is dispatched using accelerate hooks.
+2024-10-22 01:35:02,037 - ERROR - Error initializing Trainer: You can't move a model that has some modules offloaded to cpu or disk.
