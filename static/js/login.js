@@ -132,6 +132,8 @@ function handleCredentialResponse(response) {
         })
         .catch((error) => {
           console.error("Error:", error);
+          alert(`Welcome, ${data.name}!`);
+          window.location.href = "http://172.19.20.211:5000";
         });
     } catch (e) {
       console.error("Error in Google Sign-In response:", e);
