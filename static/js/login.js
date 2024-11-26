@@ -3,16 +3,16 @@ const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");
 
 togglePassword.addEventListener("click", function () {
-  const type =
-    passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
   passwordInput.setAttribute("type", type);
+  togglePassword.classList.toggle("visible"); // Optional: Add a class to change the icon
 });
 
 // Variables for form elements
-let loginEmail = document.getElementById("email-address");
-let loginPassword = document.getElementById("password");
-let errorContainer = document.getElementById("error-messages");
-let box = document.querySelector(".box");
+const loginEmail = document.getElementById("email-address");
+const loginPassword = document.getElementById("password");
+const errorContainer = document.getElementById("error-messages");
+const box = document.querySelector(".box");
 
 // Error handling functions
 const setError = (ele, msg) => {
@@ -25,7 +25,7 @@ const setError = (ele, msg) => {
     box.appendChild(error);
   }
 
-  error.innerHTML = `<span style="font-size: 0.8em;">${msg}</span>`;
+  error.innerHTML = `<span style="font-size: 0.8em; color: red;">${msg}</span>`;
   box.classList.add("error");
   box.classList.remove("success");
 };
@@ -34,7 +34,7 @@ const clearError = (ele) => {
   let box = ele.parentElement;
   let error = box.querySelector(".error");
   if (error) {
-    error.innerHTML = "";
+    error.remove();
     box.classList.remove("error");
     box.classList.add("success");
   }
@@ -42,7 +42,7 @@ const clearError = (ele) => {
 
 // Validation functions
 const mailFormat = (email) => {
-  const re = /\w+@\w+\.\w+/;
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 };
 
@@ -53,37 +53,38 @@ const passFormat = (password) => {
 
 // Sign-In Function with validation
 function signIn() {
-  const email = loginEmail.value;
-  const password = loginPassword.value;
+  const email = loginEmail.value.trim();
+  const password = loginPassword.value.trim();
   errorContainer.innerHTML = ""; // Clear previous error messages
+  errorContainer.style.height = "0px"; // Reset height for errors
 
-  let errors = []; // Array to collect error messages
+  let hasError = false;
 
   // Validate email format
   if (!mailFormat(email)) {
-    errors.push("Please enter a valid email");
+    setError(loginEmail, "Please enter a valid email");
+    hasError = true;
+  } else {
+    clearError(loginEmail);
   }
 
   // Validate password format
   if (!passFormat(password)) {
-    errors.push(
-      "Password must be at least 8 characters long, including upper/lowercase letters and a number"
-    );
+    setError(loginPassword, "Password must be at least 8 characters, including upper/lowercase letters and a number");
+    hasError = true;
+  } else {
+    clearError(loginPassword);
   }
 
-  if (errors.length > 0) {
-    // Display the error messages in the container
-    errorContainer.innerHTML = errors.join(" | "); // Display errors in a single line
-    // Adjust the height of the container if there are errors
-    errorContainer.style.height = `${errors.length * 30}px`; // Adjust height based on number of errors
-    box.style.height = "90%";
+  if (hasError) {
+    errorContainer.innerHTML = "Fix the highlighted errors before proceeding.";
+    errorContainer.style.height = "auto";
+    box.style.height = "90%"; // Adjust box height for error display
   } else {
     // Proceed with sign-in logic if no errors
     console.log("Form is valid");
-    // Add your custom sign-in logic here (e.g., API calls, user authentication)
-    errorContainer.style.height = "0px"; // Reset height if no errors
-    alert("Login successful!")
-    window.location.href="./index"
+    alert("Login successful!");
+    window.location.href = "./index"; // Redirect to the dashboard
   }
 }
 
@@ -101,7 +102,7 @@ function handleCredentialResponse(response) {
     .then((data) => {
       if (data.success) {
         alert(`Welcome, ${data.name}!`);
-        window.location.href = "http://192.168.169.154:5000";
+        window.location.href = "http://192.168.169.154:5000"; // Redirect after successful login
       } else {
         alert("Google sign-in failed: " + data.error);
       }
@@ -113,21 +114,15 @@ function handleCredentialResponse(response) {
 }
 
 // Initialize Google OAuth
-google.accounts.id.initialize({
-  client_id:
-    "382357017579-sieojf15iists629u2r5o06d3h92j9ej.apps.googleusercontent.com", // Replace with your actual Google Client ID
-  callback: handleCredentialResponse,
-});
-
-// Render Google Sign-In button
 google.accounts.id.renderButton(
-  document.getElementById("google-signin-button"), // This will render inside the div with this ID
+  document.getElementById("google-signin-button"), // Ensure this ID matches
   {
-    theme: "outline", // Button style (you can change this)
-    size: "large", // Button size (you can adjust)
+    theme: "outline",
+    size: "large",
   }
 );
+console.log("Google sign-in button rendered");
+
 
 // Attach event listener to Sign-In button
-let loginButton = document.querySelector(".sign-in");
-loginButton.addEventListener("click", signIn); // Ensure to call the signIn function on click
+document.querySelector(".sign-in").addEventListener("click", signIn);
