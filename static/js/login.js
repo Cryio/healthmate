@@ -82,8 +82,7 @@ function signIn() {
     // Save the name to localStorage (extract from email)
     const namePart = email.split("@")[0];
     localStorage.setItem("Name", namePart);
-
-    alert("Login successful!");
+    alert(`Welcome, ${namePart}!`);
     window.location.href = "http://172.19.20.211:5000"; // Redirect to the dashboard
   }
 }
