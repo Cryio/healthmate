@@ -106,7 +106,7 @@ window.onload = function () {
       // Parse the token (optional)
       const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
       console.log("Decoded JWT Token:", decodedToken);
-      localStorage.setItem("Name", data.name); 
+      localStorage.setItem("Name", decodedToken.name); 
       window.location.href = "http://172.19.20.211:5000";
       // Continue with your sign-in logic here
     } catch (e) {
