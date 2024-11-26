@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Montserrat;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fdf0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  width: 45%;
+  height: 80%;
+  background-color: rgb(252, 227, 173);
+  -webkit-box-shadow: 0px 0px 24px 7px rgba(0, 0, 0, 0.37);
+  -moz-box-shadow: 0px 0px 24px 7px rgba(0, 0, 0, 0.37);
+  box-shadow: 0px 0px 24px 7px rgba(0, 0, 0, 0.37);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+.box2 {
+  height: 100%;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.box2 img {
+  height: 25%;
+  width: 65%;
+  margin-bottom: 10px;
+}
+.box h4 {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 500;
+  padding-left: 8px;
+  margin-bottom: 10px;
+}
+.box2 h3 {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 18px;
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+.number {
+  align-self: flex-start;
+  padding: 8px;
+  width: 100%;
+  height: 7%;
+  border: none;
+  color: black;
+  background-color: rgb(253, 240, 224);
+  font-size: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-family: montserrat;
+  font-size: 14px;
+}
+.number:focus {
+  outline: none;
+}
+.password-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: 7%;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background-color: rgb(253, 240, 224);
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+.password-box input {
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+  font-family: montserrat;
+  font-size: 14px;
+}
+.password-box img {
+  position: absolute;
+  width: 5%;
+  height: 40%;
+  margin: 0;
+  z-index: 2;
+  margin-right: 10px;
+  right: 0;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sign-in-box {
+  width: 100%;
+}
+.sign-in {
+  border: none;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(229, 171, 113);
+  border-radius: 5px;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 15px;
+}
+.sign-in:hover {
+  cursor: pointer;
+  background-color: rgb(204, 150, 96);
+}
+.sign-in:active {
+  background-color: rgb(204, 150, 96);
+  transform: scale(0.97);
+}
+.Oauth-box {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.Oauth-box img {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  margin-right: 10px;
+}
+.Oauth {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: white;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+.Oauth:hover {
+  cursor: pointer;
+}
+.Oauth:active {
+  transform: scale(0.97);
+}
+.sign-up-page a {
+  text-decoration: none;
+  color: rgb(219, 134, 48);
+}
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+.success {
+  border-color: green; /* Optional: style for successful input */
+}
+.error-message-container {
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 10px;
+  color: red;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .box {
+    width: 90%; /* Full width on smaller screens */
+    height: auto; /* Let the height adjust */
+  }
+
+  .sign-in,
+  .Oauth {
+    font-size: 12px; /* Slightly smaller font size for mobile */
+  }
+  /* Ensuring input fields have the right padding and margin */
+  .number {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    width: 100%;
+    background-color: rgb(253, 240, 224);
+  }
+
+  /* Fix for password box */
+  .password-box {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  /* Media queries are already set for responsiveness, so no further changes are needed here */
+
+  .box2 img {
+    height: auto; /* Adjust image height for smaller screens */
+    width: 10%; /* Make it wider on smaller screens */
+  }
+  .Oauth-box img {
+    width: 20%;
+  }
+}
+
+@media (max-width: 480px) {
+  .box h4 {
+    font-size: 10px; /* Smaller heading font size */
+  }
+  .box2 h3 {
+    font-size: 16px; /* Smaller subheading font size */
+  }
+}

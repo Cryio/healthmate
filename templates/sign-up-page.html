@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthmate</title>
+    <link rel="stylesheet" href="../static/css/signup-styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="box2">
+          <img src="../static/assets/{BA3A1BE3-AC1E-4B60-97F6-78A07A0A5FF9}.png" alt="HealthMate Logo" />
+
+          <h3>Let's start your HealthMate journey!</h3>
+          <h4>Email address</h4>
+          <input
+            type="text"
+            placeholder="Enter your email address"
+            class="number"
+            id="number"
+          />
+
+          <h4>Password</h4>
+          <div class="password-box">
+            <input
+              type="password"
+              placeholder="Enter your password"
+              class="number"
+              id="password"
+            />
+            <img class="visible-password" src="../static/assets/icons8-eye-30.png" alt="Toggle Password Visibility" id="togglePassword" />
+
+          </div>
+          <div class="error" id="jointError" style="margin-bottom: 15px;"></div>
+          <div class="sign-up-box">
+            <button class="sign-up">Sign up</button>
+          </div>
+          <h5
+            class="sign-up-page"
+            style="font-family: Montserrat; font-weight: 500; font-size: 12px"
+          >
+            Already have an account?
+            <a href="../templates/login.html">Sign in now</a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <script src="../static/js/sign-up.js"></script>
+  </body>
+</html>

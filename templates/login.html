@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthmate</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login-styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="box2">
+          <img
+            src="../static/assets/{BA3A1BE3-AC1E-4B60-97F6-78A07A0A5FF9}.png"
+            alt="HealthMate Logo"
+          />
+          <h3>Nice to see you again</h3>
+          <h4>Email address</h4>
+          <input
+            type="email"
+            placeholder="Enter your email address"
+            class="number"
+            id="email-address"
+            required
+          />
+          <small id="email-error" class="error-message"></small>
+          <h4>Password</h4>
+          <div class="password-box">
+            <input
+              type="password"
+              placeholder="Enter your password"
+              class="number"
+              id="password"
+              required
+            />
+            <img
+              class="visible-password"
+              src="../static/assets/icons8-eye-30.png"
+              alt="Toggle Password Visibility"
+              id="togglePassword"
+            />
+          </div>
+          <div class="sign-in-box">
+            <button class="sign-in" onclick="signIn()">Sign in</button>
+          </div>
+          <h5
+            style="font-family: Montserrat; font-weight: 500; font-size: 12px"
+          >
+            Or
+          </h5>
+          <!-- Google Sign-In Button -->
+          <div class="Oauth-box">
+            <div id="google-signin-button"></div>
+          </div>
+          <h5
+            class="sign-up-page"
+            style="font-family: Montserrat; font-weight: 500; font-size: 12px"
+          >
+            Don't have an account?
+            <a href="../templates/sign-up-page.html">Sign up now</a>
+          </h5>
+
+          <!-- Error message container -->
+          <div id="error-messages" class="error-message-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/js/login.js"></script>
+  </body>
+</html>
