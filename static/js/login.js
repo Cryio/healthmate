@@ -83,63 +83,6 @@ function signIn() {
   }
 }
 
-// Google OAuth Integration
-function handleCredentialResponse(response) {
-  console.log("Encoded JWT ID token: " + response.credential);
-
-  fetch("/google-oauth-callback", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token: response.credential }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        alert(`Welcome, ${data.name}!`);
-        window.location.href = "http://172.19.20.211:5000"; // Redirect after successful login
-      } else {
-        throw new Error(data.error || "Google sign-in failed");
-      }
-    })
-    .catch((error) => {
-      console.error("Error during Google sign-in:", error);
-      alert("An unexpected error occurred. Please try again.");
-    });
-
-    try {
-      const token = response.credential;
-      console.log("JWT Token:", token);
-  
-      // Decode and verify token (optional)
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      console.log("Decoded JWT Token:", decodedToken);
-  
-      // Perform server validation or other logic
-      fetch("/google-oauth-callback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            alert(`Welcome, ${data.name}!`);
-            window.location.href = "http://172.19.20.211:5000"; // Ensure all tasks are completed before redirect
-          } else {
-            console.error("Server validation failed:", data.error);
-            alert("Google sign-in failed.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert(`Welcome, ${data.name}!`);
-          window.location.href = "http://172.19.20.211:5000";
-        });
-    } catch (e) {
-      console.error("Error in Google Sign-In response:", e);
-    }
-  }  
-
 // Initialize Google OAuth
 window.onload = function () {
   if (typeof google !== "undefined") {
@@ -165,6 +108,8 @@ window.onload = function () {
       // Continue with your sign-in logic here
     } catch (e) {
       console.error("Error during Google sign-in:", e);
+      alert(`Welcome, ${data.name}!`);
+      window.location.href = "http://172.19.20.211:5000";
     }
   }
   if (typeof google === "undefined") {
