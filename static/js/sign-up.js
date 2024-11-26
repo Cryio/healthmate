@@ -62,6 +62,8 @@ function validation() {
     users.push({ email: mail, password: pass });
     localStorage.setItem("Users", JSON.stringify(users));
     alert("User signed up successfully!");
+    const namePart = mail.split("@")[0];
+    localStorage.setItem("Name", namePart);
     window.location.href="http://172.19.20.211:5000"
   }
 }

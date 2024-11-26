@@ -79,6 +79,8 @@ function signIn() {
     // Proceed with sign-in logic if no errors
     console.log("Form is valid");
     alert("Login successful!");
+    const namePart = mail.split("@")[0];
+    localStorage.setItem("Name", namePart);
     window.location.href = "http://172.19.20.211:5000"; // Redirect to the dashboard
   }
 }
@@ -104,11 +106,11 @@ window.onload = function () {
       // Parse the token (optional)
       const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
       console.log("Decoded JWT Token:", decodedToken);
+      localStorage.setItem("Name", data.name); 
       window.location.href = "http://172.19.20.211:5000";
       // Continue with your sign-in logic here
     } catch (e) {
       console.error("Error during Google sign-in:", e);
-      window.location.href = "http://172.19.20.211:5000";
     }
   }
   if (typeof google === "undefined") {
