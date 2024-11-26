@@ -84,7 +84,7 @@ function signIn() {
     // Proceed with sign-in logic if no errors
     console.log("Form is valid");
     alert("Login successful!");
-    window.location.href = "./index"; // Redirect to the dashboard
+    window.location.href = "http://172.19.20.211:5000"; // Redirect to the dashboard
   }
 }
 
@@ -102,7 +102,7 @@ function handleCredentialResponse(response) {
     .then((data) => {
       if (data.success) {
         alert(`Welcome, ${data.name}!`);
-        window.location.href = "http://192.168.169.154:5000"; // Redirect after successful login
+        window.location.href = "http://172.19.20.211:5000"; // Redirect after successful login
       } else {
         alert("Google sign-in failed: " + data.error);
       }
