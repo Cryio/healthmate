@@ -113,23 +113,28 @@ window.onload = function () {
   if (typeof google !== "undefined") {
     google.accounts.id.initialize({
       client_id: "382357017579-sieojf15iists629u2r5o06d3h92j9ej.apps.googleusercontent.com", // Replace with your actual client ID
-      callback: handleCredentialResponse,
+      callback: handleCredentialResponse
     });
-
     google.accounts.id.renderButton(
-      document.getElementById("google-signin-button"), // Ensure this matches your HTML
-      {
-        theme: "outline",
-        size: "large",
-      }
+      document.getElementById("google-signin-button"), 
+      { theme: "outline", size: "large" }  // Customize button size and style
     );
-    console.log("Google sign-in button rendered");
-  } else {
-    console.error("Google API script failed to load.");
-    alert("Google Sign-In is currently unavailable. Please try again later.");
+  };
+  
+  function handleCredentialResponse(response) {
+    try {
+      const token = response.credential; // Get the JWT token
+      console.log("JWT Token:", token);
+  
+      // Parse the token (optional)
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decode JWT
+      console.log("Decoded JWT Token:", decodedToken);
+      
+      // Continue with your sign-in logic here
+    } catch (e) {
+      console.error("Error during Google sign-in:", e);
+    }
   }
-};
-
 if (typeof google === "undefined") {
   console.error("Google API is not defined. Ensure the script is loaded.");
   alert("Google Sign-In is unavailable at the moment. Please try again later.");
