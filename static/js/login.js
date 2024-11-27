@@ -83,7 +83,7 @@ function signIn() {
     const namePart = email.split("@")[0];
     localStorage.setItem("Name", namePart);
     alert(`Welcome, ${namePart}!`);
-    window.location.href = "http://172.19.20.211:5000"; // Redirect to the dashboard
+    window.location.href = "http://172.19.150.29:5000"; // Redirect to the dashboard
   }
 }
 
@@ -114,7 +114,7 @@ window.onload = function () {
       alert(`Welcome, ${decodedToken.name}!`);
 
       // Redirect after successful login
-      window.location.href = "http://172.19.20.211:5000";
+      window.location.href = "http://172.19.150.29:5000";
     } catch (e) {
       console.error("Error during Google sign-in:", e);
     }
